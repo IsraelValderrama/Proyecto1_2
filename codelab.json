@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2024-11-06T20:28:52+01:00",
+  "id": "arranque_seguro_debian",
+  "duration": 0,
+  "title": "Configuración del arranque seguro en Debian",
+  "summary": "Codelab de instalación de BIOS/UEFI",
+  "source": "Proyecto1_2.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "codelab",
+    "markdown"
+  ],
+  "tags": [
+    "web"
+  ],
+  "url": "arranque_seguro_debian"
+}

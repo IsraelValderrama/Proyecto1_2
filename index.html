@@ -1,0 +1,125 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Configuración del arranque seguro en Debian</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="arranque_seguro_debian"
+                  title="Configuración del arranque seguro en Debian"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Protegemos GRUB2 con contraseña" duration="0">
+        <p class="image-container"><img alt="etc/grub/40_custom" src="img\\42b263eb6703c139.png"></p>
+<ol type="1">
+<li>Editamos el archivo de configuración personalizada de GRUB:</li>
+</ol>
+<pre><code language="language-bash" class="language-bash">sudo nano /etc/grub.d/40_custom
+</code></pre>
+<ol type="1" start="2">
+<li>Agregamos las siguientes líneas al final del archivo:</li>
+</ol>
+<pre><code language="language-bash" class="language-bash">set superusers=&#34;root&#34;
+password root PruebaDebian123!
+</code></pre>
+<ol type="1" start="3">
+<li>Guardamos y cerramos el archivo.</li>
+</ol>
+<pre><code language="language-text" class="language-text">CTRL ^O para guardar.
+CTRL ^x para salir.
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ciframos la contraseña." duration="0">
+        <p class="image-container"><img alt="etc/grub/40_custom" src="img\\b1db53319dfa24c4.png"></p>
+<ol type="1">
+<li>Generamos una contraseña cifrada:</li>
+</ol>
+<pre><code language="language-bash" class="language-bash">sudo grub-mkpasswd-pbkdf2
+</code></pre>
+<ol type="1" start="2">
+<li>Copiamos el hash generado y editamos nuevamente el archivo 40_custom:</li>
+</ol>
+<pre><code language="language-bash" class="language-bash">sudo nano /etc/grub.d/40_custom
+</code></pre>
+<ol type="1" start="3">
+<li>Reemplazamos la línea de la contraseña por: <img alt="hash_contraseña" src="img\\b7bf5c097b9dc04d.png"></li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ajustamos permisos del archivo de configuración." duration="0">
+        <p class="image-container"><img alt="privilegios" src="img\\3357bf7c5f648e40.png"></p>
+<pre><code language="language-bash" class="language-bash">sudo chmod 700 /etc/grub.d/40_custom
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Ocultamos el menú de GRUB." duration="0">
+        <ol type="1">
+<li>Editamos el archivo de configuración de GRUB:</li>
+</ol>
+<p class="image-container"><img alt="etc/default/grub" src="img\\16f4783b410b1fb8.png"></p>
+<pre><code language="language-bash" class="language-bash">sudo nano /etc/default/grub
+</code></pre>
+<ol type="1" start="2">
+<li>Cambiamos la línea ‘GRUB_TIMEOUT=5&#39; por:</li>
+</ol>
+<pre><code language="language-text" class="language-text">    GRUB_TIMEOUT=0
+</code></pre>
+<ol type="1" start="3">
+<li>Guardamos y cerramos el archivo.</li>
+</ol>
+<pre><code language="language-text" class="language-text">CTRL ^O para guardar.
+CTRL ^x para salir.
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Actualizamos la configuración de GRUB." duration="0">
+        <p>Después de que hayamos realizado los cambios en la terminal debemos de poner este comando:</p>
+<pre><code language="language-bash" class="language-bash">sudo update-grub
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Reininciamos la máquina y ponemos las credenciales." duration="0">
+        <p class="image-container"><img alt="imagen_arranque" src="img\\83bc303804526c09.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
